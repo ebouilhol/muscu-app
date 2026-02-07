@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://muscu-app.local/schema/programme.json",
+  "title": "Programme de musculation",
+  "type": "object",
+  "required": ["metadata", "programmes", "historique"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["langue", "unitePoids", "version"],
+      "properties": {
+        "langue": {"type": "string", "const": "fr"},
+        "unitePoids": {"type": "string", "enum": ["kg", "lb"]},
+        "version": {"type": "string"}
+      }
+    },
+    "programmes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/programme"}
+    },
+    "historique": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/seanceHistorique"}
+    }
+  },
+  "$defs": {
+    "programme": {
+      "type": "object",
+      "required": ["id", "nom", "semaines"],
+      "properties": {
+        "id": {"type": "string"},
+        "nom": {"type": "string"},
+        "semaines": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/semaine"}
+        }
+      }
+    },
+    "semaine": {
+      "type": "object",
+      "required": ["index", "seances"],
+      "properties": {
+        "index": {"type": "integer", "minimum": 1},
+        "seances": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/seance"}
+        }
+      }
+    },
+    "seance": {
+      "type": "object",
+      "required": ["id", "nom", "jour", "exercices"],
+      "properties": {
+        "id": {"type": "string"},
+        "nom": {"type": "string"},
+        "jour": {
+          "type": "string",
+          "enum": [
+            "lundi",
+            "mardi",
+            "mercredi",
+            "jeudi",
+            "vendredi",
+            "samedi",
+            "dimanche"
+          ]
+        },
+        "exercices": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/exercice"}
+        }
+      }
+    },
+    "exercice": {
+      "type": "object",
+      "required": [
+        "id",
+        "nom",
+        "series",
+        "repetitions",
+        "poids",
+        "recuperationSerieSec",
+        "recuperationExerciceSec",
+        "progression"
+      ],
+      "properties": {
+        "id": {"type": "string"},
+        "nom": {"type": "string"},
+        "series": {"type": "integer", "minimum": 1},
+        "repetitions": {"type": "integer", "minimum": 1},
+        "poids": {"type": "number", "minimum": 0},
+        "recuperationSerieSec": {"type": "integer", "minimum": 0},
+        "recuperationExerciceSec": {"type": "integer", "minimum": 0},
+        "progression": {"$ref": "#/$defs/progression"}
+      }
+    },
+    "progression": {
+      "type": "object",
+      "required": ["type", "valeur"],
+      "properties": {
+        "type": {"type": "string", "const": "pourcentageHebdo"},
+        "valeur": {"type": "number", "minimum": 0}
+      }
+    },
+    "seanceHistorique": {
+      "type": "object",
+      "required": [
+        "id",
+        "seanceId",
+        "programmeId",
+        "dateISO",
+        "exercices"
+      ],
+      "properties": {
+        "id": {"type": "string"},
+        "seanceId": {"type": "string"},
+        "programmeId": {"type": "string"},
+        "dateISO": {"type": "string", "format": "date-time"},
+        "exercices": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/exerciceHistorique"}
+        }
+      }
+    },
+    "exerciceHistorique": {
+      "type": "object",
+      "required": [
+        "exerciceId",
+        "series",
+        "repetitions",
+        "poids",
+        "progressionAppliquee"
+      ],
+      "properties": {
+        "exerciceId": {"type": "string"},
+        "series": {"type": "integer", "minimum": 1},
+        "repetitions": {"type": "integer", "minimum": 1},
+        "poids": {"type": "number", "minimum": 0},
+        "progressionAppliquee": {
+          "type": "object",
+          "required": ["pourcentage", "poidsAvant", "poidsApres"],
+          "properties": {
+            "pourcentage": {"type": "number", "minimum": 0},
+            "poidsAvant": {"type": "number", "minimum": 0},
+            "poidsApres": {"type": "number", "minimum": 0}
+          }
+        }
+      }
+    }
+  }
+}
