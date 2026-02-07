@@ -1,0 +1,99 @@
+{
+  "metadata": {
+    "langue": "fr",
+    "unitePoids": "kg",
+    "version": "1.0"
+  },
+  "programmes": [
+    {
+      "id": "prog-001",
+      "nom": "Programme Démo",
+      "semaines": [
+        {
+          "index": 1,
+          "seances": [
+            {
+              "id": "s-001",
+              "nom": "Push",
+              "jour": "lundi",
+              "exercices": [
+                {
+                  "id": "ex-001",
+                  "nom": "Développé couché",
+                  "series": 4,
+                  "repetitions": 8,
+                  "poids": 80,
+                  "recuperationSerieSec": 120,
+                  "recuperationExerciceSec": 180,
+                  "progression": {
+                    "type": "pourcentageHebdo",
+                    "valeur": 5
+                  }
+                },
+                {
+                  "id": "ex-002",
+                  "nom": "Développé militaire",
+                  "series": 3,
+                  "repetitions": 10,
+                  "poids": 40,
+                  "recuperationSerieSec": 90,
+                  "recuperationExerciceSec": 150,
+                  "progression": {
+                    "type": "pourcentageHebdo",
+                    "valeur": 2
+                  }
+                }
+              ]
+            },
+            {
+              "id": "s-002",
+              "nom": "Pull",
+              "jour": "mercredi",
+              "exercices": [
+                {
+                  "id": "ex-003",
+                  "nom": "Tractions",
+                  "series": 4,
+                  "repetitions": 6,
+                  "poids": 0,
+                  "recuperationSerieSec": 120,
+                  "recuperationExerciceSec": 180,
+                  "progression": {
+                    "type": "pourcentageHebdo",
+                    "valeur": 5
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "seances": [
+            {
+              "id": "s-003",
+              "nom": "Jambes",
+              "jour": "vendredi",
+              "exercices": [
+                {
+                  "id": "ex-004",
+                  "nom": "Squat",
+                  "series": 4,
+                  "repetitions": 8,
+                  "poids": 100,
+                  "recuperationSerieSec": 150,
+                  "recuperationExerciceSec": 180,
+                  "progression": {
+                    "type": "pourcentageHebdo",
+                    "valeur": 5
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "historique": []
+}
